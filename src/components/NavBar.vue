@@ -16,7 +16,7 @@
     </div>
 </template>
 
-<script lang="ts">
+<script>
     import Icon from "./Icon.vue";
 
     export default {
@@ -32,29 +32,38 @@
         methods: {
             toggle() {
                 if (this.opened) {
-                    this.opened = false;
                     this.close();
                     return;
                 }
 
-                this.opened = true;
                 this.open();
             },
             close() {
+                this.opened = false;
                 document.querySelector(".PopoutNav")?.classList.remove("open");
             },
             open() {
+                this.opened = true;
                 document.querySelector(".PopoutNav")?.classList.add("open");
             }
         },
         mounted() {
-            const body: any = document.querySelector(".body");
+            const body = document.querySelector(".body");
             body?.addEventListener("scroll", () => {
-                if (body.scrollTop >= 300) {
+                var bannerHeight = 300;
+                if (document.querySelector(".Banner")) {
+                    bannerHeight = document.querySelector(".Banner").clientHeight;
+                }
+
+                if (body.scrollTop >= bannerHeight) {
                     this.$el.classList.add("floating");
                 } else {
                     this.$el.classList.remove("floating");
                 }
+            });
+
+            document.querySelector(".PopoutNav .header button")?.addEventListener("click", () => {
+                this.close();
             });
         }
     }

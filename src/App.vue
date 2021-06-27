@@ -3,7 +3,7 @@
         <div class="body">
             <div class="content">
                 <RouterView />
-                <NavBar :popoutNav="$refs.PopoutNav" :links="[
+                <NavBar :links="[
                     {
                         title: 'Home',
                         href: '/'
