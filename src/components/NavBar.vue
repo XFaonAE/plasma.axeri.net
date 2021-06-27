@@ -24,9 +24,6 @@
         components: {
             Icon
         },
-        mounted() {
-            console.log(this.popoutNav);
-        },
         data: () => {
             return {
                 opened: false
@@ -49,9 +46,19 @@
             open() {
                 document.querySelector(".PopoutNav")?.classList.add("open");
             }
+        },
+        mounted() {
+            const body: any = document.querySelector(".body");
+            body?.addEventListener("scroll", () => {
+                if (body.scrollTop >= 300) {
+                    this.$el.classList.add("floating");
+                } else {
+                    this.$el.classList.remove("floating");
+                }
+            });
         }
     }
-</script>
+</script> 
 
 <style lang="less">
     @import "../assets/scheme.less";
@@ -62,10 +69,15 @@
         background: @layer2;
         display: flex;
         position: sticky;
+        transition-duration: @animateSpeed;
         top: 0px;
         padding: 0px 20px;
         align-items: center;
         justify-content: space-between;
+
+        &.floating {
+            box-shadow: 0px 3px 5px @layer0;
+        }
 
         .logo a {
             color: @accentColor;
