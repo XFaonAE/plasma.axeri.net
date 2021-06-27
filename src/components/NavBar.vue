@@ -10,7 +10,7 @@
             </RouterLink>
         </div>
 
-        <button class="sidebarButton">
+        <button @click="this.toggle()" class="sidebarButton">
             <Icon icon="CollapseMenu" />
         </button>
     </div>
@@ -23,6 +23,32 @@
         props: [ "links" ],
         components: {
             Icon
+        },
+        mounted() {
+            console.log(this.popoutNav);
+        },
+        data: () => {
+            return {
+                opened: false
+            };
+        },
+        methods: {
+            toggle() {
+                if (this.opened) {
+                    this.opened = false;
+                    this.close();
+                    return;
+                }
+
+                this.opened = true;
+                this.open();
+            },
+            close() {
+                document.querySelector(".PopoutNav")?.classList.remove("open");
+            },
+            open() {
+                document.querySelector(".PopoutNav")?.classList.add("open");
+            }
         }
     }
 </script>
@@ -31,10 +57,12 @@
     @import "../assets/scheme.less";
 
     .NavBar {
-        width: 100vw;
+        width: 100%;
         height: 50px;
         background: @layer2;
         display: flex;
+        position: sticky;
+        top: 0px;
         padding: 0px 20px;
         align-items: center;
         justify-content: space-between;
