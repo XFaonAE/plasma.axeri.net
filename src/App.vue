@@ -1,26 +1,27 @@
 <template>
     <div class="App">
+        <NavBar :links="[
+            {
+                title: 'Home',
+                href: '/'
+            },
+            {
+                title: 'Download',
+                href: '/download'
+            },
+            {
+                title: 'GitHub',
+                href: '/github'
+            },
+            {
+                title: 'About',
+                href: '/about'
+            }
+        ]" />
+
         <div class="body">
             <div class="content">
                 <RouterView />
-                <NavBar :links="[
-                    {
-                        title: 'Home',
-                        href: '/'
-                    },
-                    {
-                        title: 'Download',
-                        href: '/download'
-                    },
-                    {
-                        title: 'GitHub',
-                        href: '/github'
-                    },
-                    {
-                        title: 'About',
-                        href: '/about'
-                    }
-                ]" />
             </div>
 
             <div class="footer">
@@ -58,8 +59,8 @@
     }
 
     .body {
-        max-height: 100vh;
-        min-height: 100vh;
+        max-height: calc(100vh - 50px);
+        min-height: calc(100vh - 50px);
         width: 100vw;
         overflow-y: auto;
 
